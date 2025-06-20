@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ahome Prototype website</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/landing-page.css">
+  <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      fetch("/assets/html/header.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("header-placeholder").innerHTML = html;
+    
+          // Re-evaluate scripts inside the injected HTML
+          const temp = document.createElement("div");
+          temp.innerHTML = html;
+          const scripts = temp.querySelectorAll("script");
+          scripts.forEach((oldScript) => {
+            const newScript = document.createElement("script");
+            if (oldScript.src) {
+              newScript.src = oldScript.src;
+            } else {
+              newScript.textContent = oldScript.textContent;
+            }
+            document.body.appendChild(newScript);
+          });
+        });
+
+       fetch("/assets/html/footer.html")
+    .then(res => {
+      if (!res.ok) throw new Error("Footer fetch failed");
+      return res.text();
+    })
+    .then(html => {
+      document.getElementById("footer-placeholder").innerHTML = html;
+    })
+    .catch(err => console.error("Footer error:", err));
+     </script>
+    
+    
+
+</head>
+<body class="bg-black text-white font-sans">
+
+  <!-- Header -->
+ <!-- Header (dynamically inserted) -->
+<div id="header-placeholder"></div>
+
+
+  <!-- Popup -->
+  <div id="popup" class="hidden fixed top-24 right-5 bg-white shadow-lg border rounded p-4 w-72 z-50 text-black transition-opacity duration-300">
+    <p class="mb-2 font-semibold">Become an AHOME member for access to all information. More on this</p>
+    <div class="space-y-2">
+      <a href="/login/login.html" class="block">
+      <a href="/login/login.html" class="block">
+        <button  class="bg-black text-white px-4 py-2 w-full rounded hover:bg-gray-800">
+          Log in
+        </button>
+      </a>
+    
+      <a href="/register/register.html" class="block">
+      <a href="/register/register.html" class="block">
+        <button class="bg-gray-200 text-black px-4 py-2 w-full rounded hover:bg-gray-300">
+          To register
+        </button>
+      </a>
+    </div>
+    
+  </div>
+
+  <!-- Carousel -->
+  <section class="relative w-full h-screen overflow-hidden">
+    <div id="carousel" class="w-full h-full relative">
+      <!-- Slide 1 -->
+      <div class="absolute inset-0 slide"
+        style="background-image: url('./assets/images/naasu-asakura-6n0jjVPxUgY-unsplash.jpg'); background-size: cover; background-position: center;">
+        <div class="h-full w-full bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end px-10 pb-20">
+          <h2 class="text-4xl font-bold uppercase">Underwater <br><span class="text-2xl font-light">Monsters</span></h2>
+          <p class="mt-4 max-w-lg text-gray-200">Saltwater Crocodile – nature's armored predator from the deep seas.</p>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="absolute inset-0 slide hidden-slide"
+        style="background-image: url('./assets/images/mika-baumeister-PL7K02i4s9g-unsplash.jpg'); background-size: cover; background-position: center;">
+        <div class="h-full w-full bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end px-10 pb-20">
+          <h2 class="text-4xl font-bold uppercase">The <br><span class="text-2xl font-light">Gates of Hell</span></h2>
+          <p class="mt-4 max-w-lg text-gray-200">Special inside volcanoes – exploring extreme nature's fury.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="absolute inset-0 slide hidden-slide"
+        style="background-image: url('./assets/images/doctor-tinieblas-y-hnPtZo0kk-unsplash.jpg'); background-size: cover; background-position: center;">
+        <div class="h-full w-full bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end px-10 pb-20">
+          <h2 class="text-4xl font-bold uppercase">Exploring <br><span class="text-2xl font-light">Deep Caves</span></h2>
+          <p class="mt-4 max-w-lg text-gray-200">Real Time Capsules – where the past and present collide underground.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <section class="bg-cover bg-center h-96 flex items-center justify-center"
+    style="background-image: url('https://crownd.at/assets/hero.jpg');">
+    <div class="text-center bg-black bg-opacity-50 p-6 rounded">
+      <h2 class="text-4xl font-bold mb-4">Luxury Real Estate in Vienna</h2>
+      <p class="text-lg">Where timeless design meets exclusive investment</p>
+    </div>
+  </section>
+
+  <!-- Current Projects -->
+  <section id="projects" class="py-16 text-black bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+      <h3 class="text-3xl font-bold mb-10 text-center">Current Projects</h3>
+      <div class="grid md:grid-cols-3 gap-8" id="project-grid">
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">Villa Luminea</h4>
+          <p>Stainless steel pool, panoramic view over Vienna at Kaasgraben.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">GRACE</h4>
+          <p>33 luxury apartments in the heart of the 3rd district, Hetzgasse 8.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">Crownd by Chipperfield</h4>
+          <p>Three villas designed by David Chipperfield in Vienna's 13th district.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">Casa Crownd</h4>
+          <p>Minimalist masterpiece surrounded by greenery and fresh air.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">Das Severin</h4>
+          <p>Timeless interior finishes and unmatched Vienna skyline views.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">Chez</h4>
+          <p>Parisian-inspired architecture with rooftop gardens and spa.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">Glanzinggasse</h4>
+          <p>Finest Looks – contemporary builds on the edge of urban Vienna.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+        <div class="project-card bg-white p-4 shadow rounded">
+          <h4 class="text-xl font-semibold mb-2">4ty-Two</h4>
+          <p>Luxury loft apartments with smart automation and concierge service.</p>
+          <img src="/assets/images/pexels-binyaminmellish-1396132.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Projects Carousel Section -->
+  <section id="all-projects" class="bg-black py-16 text-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-3xl font-bold mb-10 text-center">All Projects</h3>
+  
+      <!-- Outer wrapper for scroll + pause on hover -->
+      <div class="relative w-full overflow-x-hidden group">
+        <div class="flex space-x-6 animate-infinite-scroll group-hover:[animation-play-state:paused]">
+          
+          <!-- Card 1 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Luxury Villa</h4>
+            </div>
+            <!-- Individual hover popup -->
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Luxury Villa</h4>
+              <p class="text-sm mb-4">Modern 5-bedroom villa with pool in central Vienna</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+  
+          <!-- Card 2 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Urban Loft</h4>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Urban Loft</h4>
+              <p class="text-sm mb-4">Industrial-style loft in the 3rd district</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+  
+          <!-- Card 3 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Minimalist House</h4>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Minimalist House</h4>
+              <p class="text-sm mb-4">Clean lines and open spaces in this architectural gem</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+  
+          <!-- Card 4 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1600566752229-250ed79470b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Mountain Retreat</h4>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Mountain Retreat</h4>
+              <p class="text-sm mb-4">Secluded alpine home with panoramic views</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+  
+          <!-- Card 5 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Lakeside Cottage</h4>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Lakeside Cottage</h4>
+              <p class="text-sm mb-4">Charming waterfront property with private dock</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+  
+          <!-- Duplicate cards for infinite scroll effect -->
+          <!-- Card 1 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Luxury Villa</h4>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Luxury Villa</h4>
+              <p class="text-sm mb-4">Modern 5-bedroom villa with pool in central Vienna</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+  
+          <!-- Card 2 -->
+          <div class="relative flex-shrink-0 w-80 h-60 rounded-lg bg-cover bg-center overflow-hidden shadow-lg group/card"
+               style="background-image: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 z-10">
+              <h4 class="text-xl font-semibold">Urban Loft</h4>
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-80 text-white p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-center">
+              <h4 class="text-xl font-bold mb-2">Urban Loft</h4>
+              <p class="text-sm mb-4">Industrial-style loft in the 3rd district</p>
+              <a href="#" class="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors">View Project →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      
+    </div>
+  </section>
+
+<section id="insights" class="py-24 bg-white text-gray-900 relative">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 md:mb-20">
+            <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                Stay in the <span class="text-purple-700">Loop</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto animate-fade-in-up delay-100">
+                Insights, progress updates, and exclusive news from Crownd Real Estate.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-16 md:mb-24 group">
+            <div class="relative overflow-hidden rounded-xl shadow-lg transform group-hover:scale-102 transition-transform duration-500 ease-in-out">
+                <img src="/assets/images/house2.jpg.jpg" alt="Construction Progress - House Foundation" class="w-full h-80 object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-white text-sm font-semibold">View Project Gallery</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-md border-l-4 border-purple-500 transform group-hover:-translate-y-1 transition-transform duration-300">
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-semibold tracking-wide mb-3">Construction Update</span>
+                <h3 class="text-3xl font-bold mb-3 leading-snug">From Groundbreaking to Handover</h3>
+                <p class="text-gray-500 mb-4 text-sm">April 2, 2024</p>
+                <p class="text-gray-700 leading-relaxed mb-6">We document every construction phase from foundation to key handover. Here’s a look at the current status and next steps.</p>
+                <a href="#" class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold transition-colors duration-200">
+                    Learn more
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-16 md:mb-24 group">
+            <div class="md:order-2 relative overflow-hidden rounded-xl shadow-lg transform group-hover:scale-102 transition-transform duration-500 ease-in-out">
+                <img src="/assets/images/house2.jpg.jpg" alt="Screed Installation & Wine Cellar Discovery" class="w-full h-80 object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-white text-sm font-semibold">Explore Unique Features</span>
+                </div>
+            </div>
+            <div class="md:order-1 bg-white p-6 md:p-8 rounded-xl shadow-md border-r-4 border-purple-500 transform group-hover:-translate-y-1 transition-transform duration-300">
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-semibold tracking-wide mb-3">Milestone Achieved</span>
+                <h3 class="text-3xl font-bold mb-3 leading-snug">Screed Completed & Historic Wine Cellar</h3>
+                <p class="text-gray-500 mb-4 text-sm">March 15, 2024</p>
+                <p class="text-gray-700 leading-relaxed mb-6">The screed floor is now finished. Additionally, we uncovered a historic wine cellar—a true highlight for future residents and enthusiasts.</p>
+                <a href="#" class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold transition-colors duration-200">
+                    View details
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center group">
+            <div class="relative overflow-hidden rounded-xl shadow-lg transform group-hover:scale-102 transition-transform duration-500 ease-in-out">
+                <img src="/assets/images/house12.jpg.jpg" alt="Interior Finishing - Windows and Drywall" class="w-full h-80 object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-white text-sm font-semibold">See Interior Designs</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-md border-l-4 border-purple-500 transform group-hover:-translate-y-1 transition-transform duration-300">
+                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-semibold tracking-wide mb-3">Interior Work</span>
+                <h3 class="text-3xl font-bold mb-3 leading-snug">Windows & Interior Spaces in Focus</h3>
+                <p class="text-gray-500 mb-4 text-sm">March 1, 2024</p>
+                <p class="text-gray-700 leading-relaxed mb-6">Windows are installed, and drywall work is in full swing—a major step toward living comfort and optimal daylight planning.</p>
+                <a href="#" class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold transition-colors duration-200">
+                    Current status
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center mt-20">
+            <button class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out transform-gpu">
+                View all updates
+                <svg class="inline-block ml-3 w-5 h-5 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002-2v6m-4 4h8"></path></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out forwards;
+        opacity: 0; /* Ensures element starts hidden */
+    }
+
+    .animate-fade-in-up.delay-100 { animation-delay: 0.1s; }
+    /* Add more delay classes as needed for other elements */
+</style>
+  
+  
+
+
+  <!-- Investment Opportunities -->
+  <section id="invest" class="text-black py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-bold mb-6">Investment Opportunities</h3>
+      <p class="text-lg">Become part of an exclusive investment boutique. Crownd invites you to co-invest in high-end real estate in Vienna’s prime locations.</p>
+    </div>
+  </section>
+
+ <section class="relative bg-gray-900 min-h-screen overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="bubble" style="left: 25%; width: 80px; height: 80px;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 70%; width: 20px; height: 20px; animation-delay: 4s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 40%; width: 60px; height: 60px; animation-duration: 18s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 65%; width: 20px; height: 20px;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 75%; width: 110px; height: 110px; animation-delay: 3s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 35%; width: 150px; height: 150px; animation-delay: 7s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+        <div class="bubble" style="left: 85%; width: 150px; height: 150px; animation-duration: 11s;"><img src="./assets/images/pexels-binyaminmellish-1396132.jpg" alt=""></div>
+    </div>
+    
+    <div class="content flex items-center justify-center min-h-screen text-white p-8 relative z-10">
+        <div class="text-center max-w-3xl">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-wider animate-fade-in-up">
+                Where Dreams <span class="text-purple-400 block sm:inline-block mt-2 sm:mt-0">Take Shape.</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 opacity-90 font-light animate-fade-in-up delay-200">
+                Explore exquisite **buildings**, luxurious **apartments**, and bespoke **custom-made homes** designed for your ultimate lifestyle.
+            </p>
+            <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold rounded-full shadow-2xl hover:scale-105 hover:shadow-purple-500/50 transition-all duration-300 ease-in-out transform-gpu animate-fade-in-up delay-400">
+                View Our Portfolio
+                <svg class="inline-block ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </button>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white animate-bounce-slow">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out forwards;
+        opacity: 0; /* Ensure it starts hidden */
+    }
+
+    .animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
+    .animate-fade-in-up.delay-400 { animation-delay: 0.4s; }
+
+    @keyframes bounce-slow {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .animate-bounce-slow {
+        animation: bounce-slow 2s infinite;
+    }
+
+    /* Existing bubble animation (if not already defined) */
+    @keyframes bubble-rise {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+
+    .bubble {
+        position: absolute;
+        bottom: -100px; /* Start below the screen */
+        background-color: rgba(255, 255, 255, 0.1); /* Subtle white tint for bubbles */
+        border-radius: 50%;
+        animation: bubble-rise 15s infinite ease-in-out;
+        opacity: 0; /* Start hidden */
+        animation-fill-mode: forwards;
+    }
+
+    .bubble img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%; /* Make images round */
+        opacity: 0.6; /* Slightly transparent */
+    }
+</style>
+  
+
+
+  <!-- Membership -->
+  <section id="membership" class="py-20 md:py-28 text-gray-800 bg-gray-100 relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-5" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCA3OCA3OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiNFMjUyNTIiIGQ9Ik0wIDdoMzZ2MzZIMHpNNCA0Mmg3MFYwSDQyem0zNiAzMmgwdjRINDhWMjJoMzB2NDhIMzhWMjJoMzh2NDhIMzhWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJoNDBWMjJjZGFkZnNhcGRhc2Rhc2Rhc2Rhc2Rhc2QgcG9zaXRpb246IHJlbGF0aXZlOwogICAgICAgICBmb250LXNpemU6IDI0cHg7CiAgICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkOwogICAgICAgICBjb2xvcjogd2hpdGU7CiAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjsKICAgICAgICAgcGFkZGluZzogMjBweDsKICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjcpOwogICAgICAgICBib3JkZXItcmFkaXVzOiAxMHB4OwogICAgICAgICBib3gtc2hhZG93OiAwIDQgMTVweGFyZ2JkYShkZGwsa2poLCBqaywgamhpbyk7CiAgICAgICAgIHotaW5kZXg6IDEwOwogICAgIH0KCSAgICAuYnViYmxlIHsKICAgICAgICAgcG9zaXRpb246IGFic29sdXRlOwogICAgICAgICBib3R0b206IC0xMDBweDsKICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjIpOwogICAgICAgICBib3JkZXItcmFkaXVzOiA1MCU7CiAgICAgICAgIGFuaW1hdGlvbjogYnViYmxlLWhlcm8gMTUwcyBpbmZpbml0IGVhc2UtZ2xhc3M7CiAgICAgICAgIG9wYWNpdHk6IDA7CiAgICAgICAgIGFuaW1hdGlvbi1maWxsLW1vZGU6IGZvcndhcmRzOwogICAgICAgICBwcm9wZXJ0eTogYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjIpOwogICAgICAgICBib3JkZXItcmFkaXVzOiA1MCU7CiAgICAgICAgIGFuaW1hdGlvbjogYnViYmxlLXJpc2UgMzBzIGluZmluaXRlIGVhc2UtaW4tb3V0OwogICAgICAgICBvcGFjaXR5OiAwOwogICAgICAgICBhbmltYXRpb24tZmlsbC1tb2RlOiBmb3J3YXJkczsKICAgIH0KCSAgICAuYnViYmxlIGltZyB7CiAgICAgICAgIHdpZHRoOiAxMDAlOwogICAgICAgICBoZWlnaHQ6IDEwMCU7CiAgICAgICAgIG9iamVjdC1maXQ6IGNvdmVyOwogICAgICAgICBib3JkZXItcmFkaXVzOiA1MCU7CiAgICAgICAgIG9wYWNpdHk6IDAuNjsKICAgIH0KCjwvc3R5bGU+CgogICAgPGRpdiBjbGFzcz0iY29udGVudCBtYXgtd2lkdGgtNGxlIG14LWF1dG8gcHgtNCB0ZXh0LWNlbnRlciByZWxhdGl2ZSB6LTEwIj4KICAgICAgPHNwYW4gY2xhc3M9Imluc2lnaHQtc21hbGwtc2NlZW4iPlRhZ2xpbmUgR28gSGVyZTwvc3Bhbj4KICAgICAgICA8aDEgY2xhc3M9InRleHQtNWxlIG1kOnRleHQtNmxlIGZvbnQtYm9sZCBtYi00IGxlYWRpbmctdGlnaHQgdHJhY2tpbmctd2lkZXIgYW5pbWF0ZS1mYWRlLWluLXVwIj4KICAgICAgICAgICAgQmVjb21lIGEgdHJ1c3RlZCBtZW1iZXIKICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRleHQtcHVycGxlLTQwMCBibG9jayBzazppbWxpbmUtYmxvY2sgbXQtMiBzbTptdC0wIj5vZgogQ3Jvd25kPC9zcGFuPgozPC9oMT4KICAgICAgICA8cCBjbGFzcz0idGV4dC14bCBtZDp0ZXh0LTJsIG1iLTEwIG9wYWNpdHktOTAgZm9udC1saWdodCBhbmltYXRlLWZhZGUtaW4tdXAgZGVsYXktMjAwIj4KICAgICAgICAgICAgRXhwbG9yZSBleGNsdXNpdmUgYmVuZWZpdHMgZm9yIHJlYWwgZXN0YXRlIGVudGh1c2lhc3RzLiBKb2luIG91ciBzb2NpZXR5IGZvciBwcml2aWxlZ2VkIGFjY2VzcyB0byA8c3Ryb25nPkV4Y2x1c2l2ZSBVcmJhbiBEZXZlbG9wbWVudHMsIEZpcnN0IERpdmUgb2YgTmV3IFByb3BlcnRpZXMgPC9zdHJvbmc+LCBhbmQgPHN0cm9uZz5Qcmlvcml0eSBBY2Nlc3MgdG8gQ3Jvd25kIENvbW11bml0eTwvc3Ryb25nPi4KICAgICAgICA8L3A+CiAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJ0b2dnbGVQb3B1cChldmVudCkiIGNsYXNzPSJwYy0xMCBweS00IGJnLWdyYWRpZW50LXRvLXIgZnJvbS1wdXJwbGUtNjAwIHRvLWluZGlnby03MDAgdGV4dC13aGl0ZSBmb250LWJvbGQgcm91bmRlZC1mdWxsIHNoYWRvdy0ybCBob3ZlcjNzY2FsZS0xMDUgaG92ZXJzaGFkb3ctcHVycGxlLTUwMC81MCB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0zMDAgZWFzZS1pbi1vdXQgdHJhbnNmb3JtLWdwdSBhbmltYmF0ZS1mYWRlLWluLXVwIGRlbGF5LTQwMCI+CiAgICAgICAgICAgIEpvaW4gQ3Jvd25kIFNvY2lldHkKICAgICAgICAgICAgPHN2ZyBjbGFzcz0iaW5saW5lLWJsb2NrIG1sLTMgdy01IGgtNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0iTTE3IDhsNCA0bC00IDRNIj48L3BhdGg+PC9zdmc+CiAgICAgICAgPC9idXR0b24+CgogICAgPC9kaXY+Cjwvc2VjdGlvbj4KCi8qKiovCg8tc3R5bGU+CiAgICAuYW5pbWF0ZS1mYWRlLWluLXVwIHsKICAgICAgICAgYW5pbWF0aW9uOiBmYWRlLWluLXVwIDAuOHMgZWFzZS1vdXQgZm9yd2FyZHM7CiAgICAgICAgIG9wYWNpdHk6IDA7CiAgICAgfQoKICAgICAuYW5pbWF0ZS1mYWRlLWluLXVwLmRlbGF5LTIwMCB7CiAgICAgICAgIGFuaW1hdGlvbi1kZWxheTogMC4yczsKICAgICB9CiAgICAuYW5pbWF0ZS1mYWRlLWluLXUpLmRlbGF5LTQwMCB7CiAgICAgICAgIGFuaW1hdGlvbi1kZWxheTogMC40czsKICAgICB9CgoJCUBrZXlmcmFtZXMgZmFkZS1pbi11cCB7CiAgICAgICAgIGZyb20gewogICAgICAgICAgICBvcGFjaXR5OiAwOwogICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMjBweCk7CiAgICAgICAgIH0KICAgICAgICAgdG8gewogICAgICAgICAgICBvcGFjaXR5OiAxOwogICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0lXkoMCk7CiAgICAgICAgIH0KICAgIH0KICAgIC5idWJibGUgewogICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICAgICAgIGJvdHRvbTogLTUwcHg7CiAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOCk7CiAgICAgICAgIGJvcmRlci1yYWRpdXM6IDUwJTsKICAgICAgICAgYW5pbWF0aW9uOiBidWJibGUtd2F2ZSAyNS4zcyBpbmZpbml0IGVhc2UtaW4tb3V0OwogICAgICAgICBvcGFjaXR5OiAwOwogICAgICAgICBhbmltYXRpb24tZmlsbC1tb2RlOiBmb3J3YXJkczsKICAgICB9CiAgICAgIEBLZXlmcmFtZXMgYnViYmxlLXdhdmUgewogICAgICAgICAwJSB7CiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWTgwcHgpIHNjYWxlKDAuNyk7CiAgICAgICAgICAgIG9wYWNpdHk6IDAuNzsKICAgICAgICAgfQogICAgICAgICAxMDAlIHsKICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC05MHZoKSBzY2FsZ(DAuMyk7CiAgICAgICAgICAgIG9wYWNpdHk6IDAuMTsKICAgICAgICAgfQogICAgfQogICAgLnRleHQtZ3JheS04MDAgewogICAgICAgICBjb2xvcjogIzMzMzMzczsKICAgIH0KICAgIC5ib3JkZXItdC1wdXJwbGUtMzAwIHsKICAgICAgICAgYm9yZGVyLXRvcDogMnB4IHNvbGlkICNEMUIwRkY7CiAgICB9CiAgICAuc2hhZG93LWN1c3RvbSB7CiAgICAgICAgIGJveC1zaGFkb3c6IDAgNXB4IDE1cHggcmdiYSgwLCAwLCAwLCAwLjE1KTsKICAgIH0KCSAgICAuc2hhZG93LW1kLXBsLXNoYWRvdy1jdXN0b20gewogICAgICAgICBib3gtc2hhZG93OiAwIDdweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4yKTsKICAgIH0KPC9zdHlsZT4='); background-size: 100px; background-repeat: repeat; filter: invert(8%);"></div>
+
+    <div class="max-w-4xl mx-auto px-4 relative z-10">
+        <div class="bg-white rounded-xl shadow-lg md:shadow-xl p-8 md:p-12 border-t-4 border-purple-600 text-center animate-fade-in-up">
+            <p class="text-sm uppercase tracking-widest text-purple-600 font-semibold mb-3">Exclusive Access</p>
+            <h3 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight">
+                Join the <span class="text-purple-700">Ahome</span>
+            </h3>
+            <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                Unlock a world of opportunities in prime properties. Gain privileged access to:
+            </p>
+            
+            <ul class="text-left max-w-sm mx-auto mb-10 space-y-3 text-gray-700 text-lg">
+                <li class="flex items-center justify-center sm:justify-start">
+                    <svg class="w-6 h-6 text-purple-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.279a8.958 8.958 0 011.088 4.279m-1.088 4.279a8.958 8.958 0 01-1.088 4.279m-8.912-8.912a8.96 8.96 0 01-4.279 1.088m4.279-1.088a8.96 8.96 0 00-4.279 1.088m-8.912-8.912a8.958 8.958 0 01-1.088-4.279m1.088-4.279a8.958 8.958 0 011.088-4.279m8.912 8.912a8.96 8.96 0 014.279-1.088m-4.279 1.088a8.96 8.96 0 004.279 1.088"></path></svg>
+                    <span><strong>Private Updates</strong> on exclusive listings</span>
+                </li>
+                <li class="flex items-center justify-center sm:justify-start">
+                    <svg class="w-6 h-6 text-purple-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span><strong>Early Bird Offers</strong> on new developments</span>
+                </li>
+                <li class="flex items-center justify-center sm:justify-start">
+                    <svg class="w-6 h-6 text-purple-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    <span><strong>VIP Invitations</strong> to property viewings</span>
+                </li>
+            </ul>
+
+            <button onclick="togglePopup(event)" class="bg-gradient-to-r from-purple-700 to-indigo-800 text-white font-bold text-lg px-10 py-4 rounded-full shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out transform-gpu animate-fade-in-up delay-200">
+                Join the Society
+                <svg class="inline-block ml-3 w-6 h-6 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 15h0M6 15h0"></path></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out forwards;
+        opacity: 0; /* Ensures element starts hidden */
+    }
+
+    .animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
+    /* You can add more delay classes if you introduce more animated elements */
+
+    /* The original bubble animation from the previous section should be here too if you're keeping it */
+    /* Example:
+    @keyframes bubble-rise {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+    .bubble {
+        animation: bubble-rise 15s infinite ease-in-out;
+        ... other bubble styles
+    }
+    */
+</style>
+
+   <section class="py-24 md:py-32 bg-gray-950 text-white relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-15" style="background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <p class="text-sm md:text-base uppercase tracking-widest text-purple-400 font-medium mb-4 animate-fade-in-up delay-50">
+            Exclusive Insights
+        </p>
+        <h2 class="text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight animate-fade-in-up delay-100">
+            Ahome <span class="text-purple-300 italic">Dispatch</span>
+        </h2>
+        <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto font-light leading-relaxed animate-fade-in-up delay-200">
+            Step inside the world of premier real estate. Subscribe for curated **market trends**, early access to **new listings**, and exclusive **expert commentary**.
+        </p>
+        <div class="max-w-xl mx-auto flex flex-col sm:flex-row gap-5 animate-fade-in-up delay-300">
+            <input 
+                type="email" 
+                placeholder="Your professional email address" 
+                class="flex-grow p-4 md:p-5 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-3 focus:ring-purple-500 transition-all duration-300 border border-gray-700 bg-gray-800 text-white shadow-lg" 
+                aria-label="Email address for newsletter subscription"
+            />
+            <button 
+                class="px-8 py-4 md:py-5 bg-purple-600 text-white rounded-lg font-bold text-lg shadow-xl hover:bg-purple-700 hover:scale-105 transition-all duration-300 transform-gpu flex items-center justify-center gap-2 tracking-wide"
+            >
+                Subscribe Now
+                <svg class="w-6 h-6 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap'); /* For the font-serif */
+    
+    @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 0; }
+    .animate-fade-in-up.delay-50 { animation-delay: 0.05s; }
+    .animate-fade-in-up.delay-100 { animation-delay: 0.1s; }
+    .animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
+    .animate-fade-in-up.delay-300 { animation-delay: 0.3s; }
+</style>
+
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- External JS file (optional) -->
+  <script src="/assets/js/landing-page.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  
+
+</body>
+</html>
