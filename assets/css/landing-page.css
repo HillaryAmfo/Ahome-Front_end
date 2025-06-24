@@ -1,21 +1,24 @@
 .slide {
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  .hidden-slide {
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
-  }
+  transition: opacity 1s ease, transform 1s ease;
+}
+.hidden-slide {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
 
-  .project-card {
-    opacity: 0;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-  }
+.project-card {
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
 
-  
 @keyframes scroll-slow {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-scroll-slow {
@@ -26,50 +29,202 @@
   animation-play-state: paused;
 }
 
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-50% - 1.5rem)); }
-    }
-    .animate-infinite-scroll {
-      animation: scroll 20s linear infinite;
-      width: max-content;
-    }
-    @media (hover: hover) {
-      .group:hover .animate-infinite-scroll {
-        animation-play-state: paused;
-      }
-    }
-
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
-  .font-signature {
-    font-family: 'Great Vibes', cursive;
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
   }
+  100% {
+    transform: translateX(calc(-50% - 1.5rem));
+  }
+}
+.animate-infinite-scroll {
+  animation: scroll 20s linear infinite;
+  width: max-content;
+}
+@media (hover: hover) {
+  .group:hover .animate-infinite-scroll {
+    animation-play-state: paused;
+  }
+}
 
-  .bubble {
-    position: absolute;
-    display: block;
-    background: linear-gradient(225deg, #ff3cac 0%, #784ba0 50%, #2b86c5 100%);
-    animation: bubble-float 25s linear infinite;
-    bottom: -150px;
-    z-index: 1;
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
+.font-signature {
+  font-family: "Great Vibes", cursive;
+}
+
+.bubble {
+  position: absolute;
+  display: block;
+  background: linear-gradient(225deg, #ff3cac 0%, #784ba0 50%, #2b86c5 100%);
+  animation: bubble-float 25s linear infinite;
+  bottom: -150px;
+  z-index: 1;
 }
 
 @keyframes bubble-float {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-    100% {
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
 }
 
 .content {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"); /* For the font-serif */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+}
+.animate-fade-in-up.delay-50 {
+  animation-delay: 0.05s;
+}
+.animate-fade-in-up.delay-100 {
+  animation-delay: 0.1s;
+}
+.animate-fade-in-up.delay-200 {
+  animation-delay: 0.2s;
+}
+.animate-fade-in-up.delay-300 {
+  animation-delay: 0.3s;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+  /* Ensure it starts hidden */
+}
+
+.animate-fade-in-up.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-fade-in-up.delay-400 {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+/* Existing bubble animation (if not already defined) */
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100vh) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  /* Start below the screen */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Subtle white tint for bubbles */
+  border-radius: 50%;
+  animation: bubble-rise 15s infinite ease-in-out;
+  opacity: 0;
+  /* Start hidden */
+  animation-fill-mode: forwards;
+}
+
+.bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  /* Make images round */
+  opacity: 0.6;
+  /* Slightly transparent */
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+  /* Ensures element starts hidden */
+}
+
+.animate-fade-in-up.delay-100 {
+  animation-delay: 0.1s;
+}
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+  /* Ensures element starts hidden */
+}
+
+.animate-fade-in-up.delay-200 {
+  animation-delay: 0.2s;
 }

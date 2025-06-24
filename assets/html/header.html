@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8" />
@@ -22,10 +22,8 @@
 </head>
 
 <body class="bg-white">
-  <!-- HEADER -->
   <nav id="navbar" class="fixed top-0 w-full z-50 bg-transparent text-white transition-all duration-300">
     <div class="px-6 py-4 flex justify-between items-center">
-      <!-- Logo + Dropdown -->
       <div class="flex items-center gap-20 relative">
         <a href="/index.html" id="brand"
           class="text-2xl ahome-font font-semibold transition-colors duration-300 hover:text-blue-600">
@@ -34,14 +32,13 @@
 
         <button id="project-toggle" onclick="toggleDropdown()"
           class="projects-link flex items-center gap-x-2 text-white px-4 py-2 border border-white rounded-full transition hover:bg-white hover:text-black">
-          <span>Projects</span>
+          <span data-key="header_projects_button">Projects</span>
           <svg id="arrow-icon" class="down-arrow w-4 h-4 transition text-white" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
 
-        <!-- Dropdown List -->
         <div id="projects-dropdown"
           class="hidden absolute top-full right-0 mt-2 w-56 bg-white shadow-md rounded-lg z-50">
           <ul class="py-2 text-sm text-gray-700">
@@ -61,31 +58,29 @@
         </div>
       </div>
 
-      <!-- Nav Links -->
       <ul id="nav-links" class="flex-1 flex justify-center space-x-8 transition-colors duration-300">
         <li>
           <a href="/pages/propertysearch.html"
-            class="nav-link px-4 py-2 rounded-full transition font-semibold">PROPERTY SEARCH</a>
+            class="nav-link px-4 py-2 rounded-full transition font-semibold" data-key="header_property_search">RECHERCHE DE BIENS</a>
         </li>
         <li>
           <a href="/pages/purchase.html"
-            class="nav-link px-4 py-2 rounded-full transition font-semibold">PURCHASE</a>
+            class="nav-link px-4 py-2 rounded-full transition font-semibold" data-key="header_purchase">ACHAT</a>
         </li>
         <li>
           <a href="/pages/investment.html"
-            class="nav-link px-4 py-2 rounded-full transition font-semibold">INVESTMENT</a>
+            class="nav-link px-4 py-2 rounded-full transition font-semibold" data-key="header_investment">INVESTISSEMENT</a>
         </li>
         <li>
           <a href="/pages/about.html"
-            class="nav-link px-4 py-2 rounded-full transition font-semibold">IT'S AHOME</a>
+            class="nav-link px-4 py-2 rounded-full transition font-semibold" data-key="header_about">C'EST AHOME</a>
         </li>
         <li>
           <a href="/pages/contact.html"
-            class="nav-link px-4 py-2 rounded-full transition font-semibold">CONTACT</a>
+            class="nav-link px-4 py-2 rounded-full transition font-semibold" data-key="header_contact">CONTACT</a>
         </li>
       </ul>
 
-      <!-- Icons -->
       <div id="icon-set" class="flex items-center space-x-4 transition-colors duration-300">
         <button onclick="togglePopup(event)" class="hover:text-gray-300">
           <svg id="heart-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -100,97 +95,33 @@
               d="M5.121 17.804A13.937 13.937 0 0112 15c2.486 0 4.847.635 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         </button>
+        <button id="language-toggle" class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm shadow-md hover:bg-purple-700 transition-colors">
+          English
+        </button>
       </div>
     </div>
   </nav>
 
-  <!-- POPUP -->
   <div id="popup"
     class="hidden fixed top-24 right-5 bg-white shadow-lg border rounded p-4 w-72 z-50 text-black transition-opacity duration-300">
-    <p class="mb-2 font-semibold">
-      Become a CROWND member for access to all information.
+    <p class="mb-2 font-semibold" data-key="popup_info">
+      Devenez membre CROWND pour accéder à toutes les informations.
     </p>
     <div class="space-y-2">
       <a href="/pages/login.html" class="block">
-        <button class="bg-black text-white px-4 py-2 w-full rounded hover:bg-gray-800">
-          Log in
+        <button class="bg-black text-white px-4 py-2 w-full rounded hover:bg-gray-800" data-key="popup_login">
+          Connexion
         </button>
       </a>
       <a href="/pages/register.html" class="block">
-        <button class="bg-gray-200 text-black px-4 py-2 w-full rounded hover:bg-gray-300">
-          Register
+        <button class="bg-gray-200 text-black px-4 py-2 w-full rounded hover:bg-gray-300" data-key="popup_register">
+          S'inscrire
         </button>
       </a>
     </div>
   </div>
 
-  <!-- Script -->
-  <script>
-    const navbar = document.getElementById("navbar");
-    const brand = document.getElementById("brand");
-    const navLinks = document.querySelectorAll(".nav-link");
-    const projectLink = document.querySelector(".projects-link");
-    const arrow = document.querySelector(".down-arrow");
-    const icons = document.getElementById("icon-set");
-    const heartIcon = document.getElementById("heart-icon");
-
-    window.addEventListener("scroll", () => {
-      const scrolled = window.scrollY > 0;
-
-      navbar.classList.toggle("bg-white", scrolled);
-      navbar.classList.toggle("text-black", scrolled);
-      navbar.classList.toggle("text-white", !scrolled);
-      navbar.classList.toggle("shadow-md", scrolled);
-
-      brand.classList.toggle("text-black", scrolled);
-      brand.classList.toggle("text-white", !scrolled);
-
-      icons.classList.toggle("text-black", scrolled);
-      icons.classList.toggle("text-white", !scrolled);
-
-      navLinks.forEach((link) => {
-        link.classList.toggle("text-black", scrolled);
-        link.classList.toggle("text-white", !scrolled);
-        link.classList.toggle("hover:bg-gray-200/60", scrolled);
-        link.classList.toggle("hover:bg-white/20", !scrolled);
-      });
-
-      projectLink.classList.toggle("text-black", scrolled);
-      projectLink.classList.toggle("text-white", !scrolled);
-      projectLink.classList.toggle("border-gray-300", scrolled);
-      projectLink.classList.toggle("border-white", !scrolled);
-      projectLink.classList.toggle("bg-gray-100", scrolled);
-      projectLink.classList.toggle("hover:bg-gray-200", scrolled);
-
-      arrow.classList.toggle("text-gray-400", scrolled);
-      arrow.classList.toggle("text-white", !scrolled);
-
-      if (heartIcon) {
-        heartIcon.setAttribute("fill", scrolled ? "black" : "none");
-      }
-    });
-
-    function toggleDropdown() {
-      const dropdown = document.getElementById("projects-dropdown");
-      dropdown.classList.toggle("hidden");
-    }
-
-    function togglePopup(event) {
-      event.stopPropagation();
-      const popup = document.getElementById("popup");
-      popup.classList.toggle("hidden");
-    }
-
-    document.addEventListener("click", function (e) {
-      const popup = document.getElementById("popup");
-      const button = document.querySelector(
-        'button[onclick="togglePopup(event)"]'
-      );
-      if (!popup.contains(e.target) && e.target !== button) {
-        popup.classList.add("hidden");
-      }
-    });
-  </script>
+  <script src="/assets/js/header.js"></script>
 </body>
 
 </html>
